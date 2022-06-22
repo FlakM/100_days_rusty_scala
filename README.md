@@ -131,3 +131,40 @@ rust::main:
 
 [ASM cheat sheet](http://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf)
 
+
+## Day 3 - type conversions
+
+### Scala
+
+Scala doesn't have specific mechanisms for casting types.
+The closest thing to this are [implicit conversions](https://docs.scala-lang.org/scala3/reference/contextual/conversions.html)
+
+Example is present in: [Day3.scala](scala/src/main/scala/Day3.scala)
+
+
+### Rust
+
+Rust has two types of conversions: [coercion](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/casting-between-types.html)
+and type level expressed using traits [From](https://doc.rust-lang.org/std/convert/trait.From.html) for converstaions that will always success or 
+[TryFrom](https://doc.rust-lang.org/stable/std/convert/trait.TryFrom.html)
+Checkout [day3.rs](./rust/examples/day3.rs) for simple examples of usage.
+
+## Day 4 - dependent types
+
+Let's say we want to create an implementation of symmetric algorithm
+that abstracts over the key length but still is type safe.
+
+### Scala
+
+We can use the [type dependant methods](https://blog.rockthejvm.com/scala-3-dependent-types/) which are super cool 
+but due to `Array[Byte]` type we cannot express the requirements for the
+length of the array in type system. It would be easy to perform those
+checks in runtime.
+
+### Rust
+
+Rust has a type array `[T, usize]` which is parametrized by `T` so array
+elements type and second parameter - length of the array. 
+
+After that we can use [const generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics) to abstract over the length of the array.
+Checkout [day4.rs](./rust/examples/day4.rs) for simple examples of usage.
