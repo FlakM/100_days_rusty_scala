@@ -2,6 +2,16 @@
 
 100 little tasks showcasing how to perform some operations in both scala and rust
 
+My observations: 
+
+1. Rust has far more warnings for everything - dead code, unused
+   variable
+2. Scala new syntax is not yet well colored everywhere
+3. For example non exhaustive pattern matching in scala will result in
+   warning while in rust it would end in error
+
+
+
 ## Day 1 - extend foreign type
 
 Showcase of how to extend types from foreign library ie to add some
@@ -168,3 +178,29 @@ elements type and second parameter - length of the array.
 
 After that we can use [const generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics) to abstract over the length of the array.
 Checkout [day4.rs](./rust/examples/day4.rs) for simple examples of usage.
+
+
+## Day 5 - enumerations
+
+Creating list of acceptable enumerations for particular type is a very
+common task.
+
+### Scala
+
+Since scala 3 there is useful syntax for creating enumerations. Before
+that there used to be common pattern to declare sealed trait and their
+implementation inside the same file.
+
+
+Compiler was able to determine that not all cases for given enumeration
+were exhausted. Details of the implementation in scala 3 might be found
+in the [reference](https://docs.scala-lang.org/scala3/reference/enums/enums.html)
+
+Example is present in: [Day5.scala](scala/src/main/scala/Day5.scala)
+
+### Rust
+
+Enumerations in rust are a first class citizens. Many common types are
+implemented using enums.
+
+Checkout [day5.rs](./rust/examples/day5.rs) for simple examples of usage.
