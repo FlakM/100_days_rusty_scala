@@ -204,3 +204,53 @@ Enumerations in rust are a first class citizens. Many common types are
 implemented using enums.
 
 Checkout [day5.rs](./rust/examples/day5.rs) for simple examples of usage.
+
+
+## Day 6 - error handling
+
+Error handling is an essential part of every program.
+Both scala and rust have very nice features around errors.
+The rule here is not to use any dependencies but only mention them.
+
+### Scala
+
+Scala has couple ways of expressing possibility or handling of errors:
+    - `try catch` block to consume piece of code that might result with
+      Exception being thrown
+    - `Try[T]` a type signaling that a closure passed might end up with
+      successful value of type `T` or a failed case of some subtype of
+      `Throwable` this has a drowback of not specifing the error type
+      inside the signature so the reader has to check the implementation
+      or the documentation to understand what can go wrong.
+    - `Either[L,R]` a type that might contain two values, either left of
+      type `L` which by convention is marked as failed case or right of
+      type `R` which means successfull computation. Using `Either` user
+      retains the ability to express that the code might fail but also
+      retains the ability to subtype the concrete type of the error that
+      the code might return
+
+Example is present in: [Day6.scala](scala/src/main/scala/Day6.scala)
+
+The thing that kind of sucks is that the type level exception handling
+is kind of bolted onto the std lib itself. The example shows  the usage
+of method from scala.io package that has a signature that hides the fact
+that many things might go wrong.
+
+Since both `Try` and `Either` are monads they can easily be used in for
+comprehensions to compose them 
+
+### Rust
+
+Rust has a single type that is used thoroughly the ecosystem:
+`Result<T,E>` it has two possible outcome, success of type `T` and
+failed one of type `E`. There also is a nice question mark operator that
+allows to bubble up the errors to the caller.
+
+There are two leading crates that are defacto standard in the ecosystem
+for handling errors https://docs.rs/anyhow/latest/anyhow/
+ for binary crates and https://docs.rs/thiserror/latest/thiserror/ for
+ libraries (this is a vast simplification but works as a simple rule of
+ thumb)
+
+
+Checkout [day6.rs](./rust/examples/day6.rs) for simple examples of usage.
